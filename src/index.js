@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './index.css';
 
-import { Provider } from 'react-redux'
-import store from './store'
-import App from './App'
+function todos(state = [], action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return state.concat([action.text])
+    default:
+      return state
+  }
+}
 
+const store = createStore(todos)
 ReactDOM.render(<Provider store={store}>
   <App />
 </Provider>, document.getElementById('root'));
