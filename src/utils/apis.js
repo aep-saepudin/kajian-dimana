@@ -9,9 +9,11 @@ export function getArrayOfLocation(){
     .then(res => 
       res.results.map(
         obj => ({
-          latitude  : obj.latitude,
-          longitude: obj.longtitude,
-          id        : obj.id_kajian
+          latitude     : obj.latitude,
+          longitude    : obj.longtitude,
+          id           : obj.id_kajian,
+          gambar_poster: obj.gambar_poster,
+          nama_kajian  : obj.nama_kajian
         })
       )
     )

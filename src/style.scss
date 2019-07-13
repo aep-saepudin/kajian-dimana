@@ -1,0 +1,16 @@
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.CardEvent {
+  margin: 1em;
+  width: 250px;
+  
+  img {
+    display: block;
+    width  : 200px;
+    height : 200px;
+  }
+
+}
