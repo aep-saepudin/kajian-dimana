@@ -2,8 +2,9 @@
   "name": "ngaji-dimana",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://echoless-doorknobs.000webhostapp.com/build",
+  "homepage": "https://echoless-doorknobs.000webhostapp.com/build",
   "dependencies": {
+    "geolib": "^3.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",

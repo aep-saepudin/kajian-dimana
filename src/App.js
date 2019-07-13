@@ -1,29 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import Maps from './components/maps';
 
-import './App.css';
+// import './App.css';
+import { mapDistanceFromCurrentLocation } from './utils/geolocation';
+import { getArrayOfLocation } from './utils/apis';
+
 
 class App extends React.Component {
-  
+  state = {
+    locations : []
+  }
+
+  async componentDidMount(){
+    const locations = await getArrayOfLocation()
+    const locationsWithDistance = await mapDistanceFromCurrentLocation(locations)
+    this.setState({locations : JSON.stringify(locationsWithDistance, null, 3)})
+  }
+
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-           <Maps />
-        </header>
+        <pre>
+          {this.state.locations}
+        </pre>
       </div>
     );
   }
