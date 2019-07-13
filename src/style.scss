@@ -5,12 +5,34 @@ ul {
 
 .CardEvent {
   margin: 1em;
-  width: 250px;
-  
+  width: 300px;
+
   img {
     display: block;
     width  : 200px;
     height : 200px;
   }
 
+  div label {
+    display: block;
+  }
+
+  div label span {
+    display: inline-block;
+    width: 30%;
+    position: relative;
+    padding-right: 10px; /* Ensures colon does not overlay the text */
+  }
+  
+  div label span::after {
+    content: ":";
+    position: absolute;
+    right: 10px;
+  }
+
+  .item{
+    display       : inline-block;
+    width         : 60%;
+    vertical-align: top;
+  }
 }

@@ -13,7 +13,11 @@ export function getArrayOfLocation(){
           longitude    : obj.longtitude,
           id           : obj.id_kajian,
           gambar_poster: obj.gambar_poster,
-          nama_kajian  : obj.nama_kajian
+          nama_kajian  : obj.nama_kajian,
+          lokasi       : obj.alamat_masjid,
+          tanggal_event: obj.tanggal_event,
+          nama_masjid  : obj.nama_masjid,
+          jam_kajian   : obj.jam_kajian,
         })
       )
     )
