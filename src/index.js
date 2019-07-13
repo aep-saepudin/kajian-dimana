@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { render } from 'react-snapshot';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -17,7 +18,7 @@ function todos(state = [], action) {
 }
 
 const store = createStore(todos)
-ReactDOM.render(<Provider store={store}>
+render(<Provider store={store}>
   <App />
 </Provider>, document.getElementById('root'));
 
