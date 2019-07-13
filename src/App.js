@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'moment' 
 import './style.scss'
 
 // import './App.css';
@@ -15,10 +16,16 @@ class App extends React.Component {
   }
 
   async componentDidMount(){
+    
     const locations = await getArrayOfLocation()
     const currentLocation = await getCurrentLocation()
     const locationsWithDistance = await mapDistanceFromCurrentLocation(locations)  
-    const sortedByDistance = locationsWithDistance.sort(function(a, b){ return a.distance - b.distance})
+    const filterTime =  locationsWithDistance.filter(obj => {
+      const time =  Moment(`${obj.tanggal_event} ${obj.jam_kajian}`, 'D MMMM YYYY HH:mm')
+      return time.isAfter(Moment())
+    })
+
+    const sortedByDistance = filterTime.sort(function(a, b){ return a.distance - b.distance})
     this.setState({locations : sortedByDistance })
 
     const myLocations = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${currentLocation.latitude}+${currentLocation.longitude}&key=` + KEY).then(res => res.json()) 
