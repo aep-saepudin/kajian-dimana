@@ -16,33 +16,48 @@ class App extends React.Component {
   }
 
   async componentDidMount(){
-    
     const locations = await getArrayOfLocation()
     const currentLocation = await getCurrentLocation()
     const locationsWithDistance = await mapDistanceFromCurrentLocation(locations)  
+    
     const filterTime =  locationsWithDistance.filter(obj => {
       const time =  Moment(`${obj.tanggal_event} ${obj.jam_kajian}`, 'D MMMM YYYY HH:mm')
       return time.isAfter(Moment())
     })
 
     const sortedByDistance = filterTime.sort(function(a, b){ return a.distance - b.distance})
+    this.AllTimeEvent = sortedByDistance
     this.setState({locations : sortedByDistance })
 
     const myLocations = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${currentLocation.latitude}+${currentLocation.longitude}&key=` + KEY).then(res => res.json()) 
     this.setState({myLocation : myLocations.results[0].formatted })
   }
 
+  handleCheckbox(e){
+    if (this.AllTimeEvent) {
+      if (e.target.checked) {
+        const todayKajian = this.AllTimeEvent.filter(obj => obj.tanggal_event ===  Moment().format('D MMMM YYYY'))
+        this.setState({locations : todayKajian })
+      } else {
+        this.setState({locations : this.AllTimeEvent })
+      }
+    }
+    
+  }
+
   render(){
     return (
       <div className="App">
         <div> My Location : {this.state.myLocation}</div> 
+        
+        <div> 
+          <input type="checkbox" id="today" onClick={this.handleCheckbox.bind(this)}/> 
+          <label htmlFor="today">Hari Ini</label> 
+        </div>
+
         <ul>
           {this.state.locations.map(obj => <CardEvent key={obj.id} data ={obj} />)}
         </ul>
-
-        {/* <pre>
-          {this.state.locations}
-        </pre> */}
         
       </div>
     );

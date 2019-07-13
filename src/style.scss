@@ -36,3 +36,8 @@ ul {
     vertical-align: top;
   }
 }
+
+input + label {
+  user-select: none;
+  cursor: pointer;
+}
